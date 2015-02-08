@@ -1,5 +1,5 @@
 var mongoose = require('mongoose')
-db_name = 'vsharedb'
+db_name = 'jserver'
 //default for local development
 mongodb_connection_string = 'mongodb://127.0.0.1/' + db_name;
 //take advantage of openshift env vars when available:
