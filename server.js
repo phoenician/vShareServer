@@ -52,6 +52,35 @@ app.get('/api/expense/:eventid', function(req, res, next){
 	})
 })
 
+app.get('/api/usersearch/:attribute/:searchstr', function (req, res, next) {
+	console.log('Search users request received!')
+	var attribute = req.params.attribute
+	var searchstr = req.params.searchstr
+	var regexp = new RegExp(searchstr, "i")
+
+	console.log("Searching users with " + attribute +" like: " + searchstr)
+	if(attribute == "name"){
+		Participant.find({"name":regexp}, function(err, participants){
+			if (err){
+				return next(err)
+			}
+			res.contentType('application/json')
+			console.log(JSON.stringify(participants))
+			res.send(JSON.stringify(participants))
+		})
+	}
+	else if(attribute == "phone"){
+		Participant.find({"phone":regexp}, function(err, participants){
+			if (err){
+				return next(err)
+			}
+			res.contentType('application/json')
+			console.log(JSON.stringify(participants))
+			res.send(JSON.stringify(participants))
+		})
+	}
+})
+
 app.get('/api/user/:countrycode/:phone', function (req, res, next) {
 	console.log('get user request received!')
 	var code = req.params.countrycode
